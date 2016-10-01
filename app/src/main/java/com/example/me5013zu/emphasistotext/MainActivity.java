@@ -1,7 +1,9 @@
 package com.example.me5013zu.emphasistotext;
 
+import android.graphics.Paint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,6 +36,14 @@ public class MainActivity extends AppCompatActivity implements EmphasisDialogFra
 
     @Override
     public void selectedChoice(ArrayList<Integer> choice) {
-        mEditText.setText(choice.toString());
+        String mEmphasizedText = mEditText.getText().toString();
+
+        if (choice.contains(0)) {
+            mEditText.setText(mEmphasizedText.toUpperCase());
+        } else if (choice.contains(1)) {
+            mEditText.setText(mEmphasizedText + "!!!");
+        } else if (choice.contains(2)) {
+            mEditText.setText(mEmphasizedText + ":)");
+        }
     }
 }
