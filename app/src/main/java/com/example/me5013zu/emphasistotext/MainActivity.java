@@ -1,5 +1,6 @@
 package com.example.me5013zu.emphasistotext;
 
+import android.content.Intent;
 import android.graphics.Paint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,6 +14,8 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements EmphasisDialogFragment.SelectedChoiceListener {
 
+    //static string to send data to the emphasisDialogFragment
+    public static String mEmphasizedText;
     EditText mEditText;
     Button mEmphasis;
 
@@ -32,18 +35,29 @@ public class MainActivity extends AppCompatActivity implements EmphasisDialogFra
                 dialog.show(getFragmentManager(), "Emphasis Dialog");
             }
         });
+
+        //on click listener sets the edit text field to nothing for the user
+        //when it is clicked
+        mEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mEditText.setText("");
+            }
+        });
     }
 
     @Override
     public void selectedChoice(ArrayList<Integer> choice) {
-        String mEmphasizedText = mEditText.getText().toString();
+        //sets the static string equal to what ever is in the edit text field
+        mEmphasizedText = mEditText.getText().toString();
 
+        //if any of the choices contains one of the array indexes, it will add certain aspects/emphasises to the text
         if (choice.contains(0)) {
-            mEditText.setText(mEmphasizedText.toUpperCase());
-        } else if (choice.contains(1)) {
-            mEditText.setText(mEmphasizedText + "!!!");
-        } else if (choice.contains(2)) {
-            mEditText.setText(mEmphasizedText + ":)");
+            mEmphasizedText = mEmphasizedText.toUpperCase();
+        } if (choice.contains(1)) {
+            mEmphasizedText += "!!!";
+        } if (choice.contains(2)) {
+            mEmphasizedText += ":)";
         }
     }
 }
